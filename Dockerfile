@@ -11,4 +11,9 @@ WORKDIR /workdir
 
 RUN go build -o main
 
+RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+RUN golangci-lint --version
+
+RUN golangci-lint run || echo "Linter failed"
+
 ENTRYPOINT ["/workdir/main"]
